@@ -1,1 +1,237 @@
-"Hello World" 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="COB-GS: Clear Object Boundaries in 3DGS Segmentation Based on Boundary-Adaptive Gaussian Splitting">
+  <meta name="keywords" content="COB-GS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COB-GS: Clear Object Boundaries in 3DGS Segmentation Based on Boundary-Adaptive Gaussian Splitting</title>
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet"> -->
+  <link href="./static/css/googlefonts.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/academicons.min.css"> -->
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+  <!-- <link rel="icon" href="./static/images/icon.png"> -->
+
+  <script src="./static/js/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/video_comparison.js"></script>
+
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>        
+  
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+});
+</script>
+
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body", style="padding-bottom: 0rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-3 publication-title">COB-GS: Clear Object Boundaries in 3DGS Segmentation Based on Boundary-Adaptive Gaussian Splitting</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Jiaxin Zhang&nbsp; 
+              <a href="https://homepage.hit.edu.cn/jiangjunjun?lang=zh">Junjun Jiang<sup>†</sup></a>&nbsp;
+              Youyu Chen&nbsp; 
+              <a href="https://homepage.hit.edu.cn/jiangkui">Kui Jiang</a>&nbsp;
+              <a href="https://homepage.hit.edu.cn/xmliu">Xianming Liu</a>&nbsp;
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block", style="color:#726f6f">Harbin Institute of Technology&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block", style="font-size: 15px;color:#726f6f">zhangjiaxin@stu.hit.edu.cn&nbsp;&nbsp;</span>
+            <span class="author-block", style="font-size: 15px;color:#726f6f">jiangjunjun@hit.edu.cn&nbsp;&nbsp;</span>
+            <span class="author-block", style="font-size: 15px;color:#726f6f">chenyouyu@stu.hit.edu.cn&nbsp;&nbsp;</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block", style="font-size: 15px;color:#726f6f"><sup>†&nbsp;</sup>Corresponding author&nbsp;&nbsp;</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block", style="color:#367DBD";>CVPR 2025</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2503.19443"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.19443"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ZestfulJX/COB-GS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>github</span>
+                  </a>
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">What is COB-GS?</h2>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        3D segmentation based on 3D Gaussian Splatting (3DGS) struggles with accurately delineating object boundaries, as Gaussian primitives often span across object edges due to their inherent volume and the lack of semantic guidance during training. 
+        <span style="color: red;">Clear Object Boundaries for 3DGS Segmentation</span> aims to improve segmentation accuracy by clearly delineating blurry boundaries of interwoven Gaussian primitives within the scene.
+      </p>
+      <div class="image-container">
+        <img src="./static/videos/output_truck.gif" alt="DashGaussian Animation" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="image-container">
+        <img src="./static/videos/output_kitchen.gif" alt="DashGaussian Animation" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-one-fifth has-text-centered">Render</div>
+        <div class="column is-one-fifth has-text-centered">SA3D-GS</div>
+        <div class="column is-one-fifth has-text-centered">SAGD</div>
+        <div class="column is-one-fifth has-text-centered">FlashSplat</div>
+        <div class="column is-one-fifth has-text-centered">COB-GS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Method Overview</h2>
+        <h3 class="title is-5">Boundary-Adaptive Gaussian Splitting and Boundary-Guided Texture Restoration</h3>
+        <img alt="Architecture" src="./static/images/pipeline.png" width="100%"/>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        COB-GS is a 3DGS refinement and segmentation method that that jointly optimizes
+        semantics and appearance to register semantic masks
+        to Gaussian primitives. We
+        introduce mask label as an additional attribute to each Gaussian
+        for segmentation. Moreover, we reveal correlation
+        between the gradient direction of labels and the
+        supervising category at the pixel level, which is a strong discriminator
+        of ambiguous Gaussian primitives on the boundary.
+        Speciffcally, during the mask optimization phase, our
+        approach utilizes gradient statistics of the mask label to identify
+        and split boundary Gaussians, allowing precise alignment
+        with object edges. In the scene optimization phase, we
+        refine the scene texture on the correct boundary structure to
+        maintain visual quality.
+      </p>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h3 class="title is-5">Robustness Against Erroneous Masks</h3>
+        <img alt="Architecture" src="./static/images/edge.png" width="100%"/>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        In fact, the binary masks predicted by the trained
+        2D vision model exhibit discreteness, which often leads to
+        inaccuracies and inconsistencies in object boundary predictions
+        across different views.
+        By refining tiny boundary
+        Gaussians, we exclusively enhance robustness of our
+        method against inaccurate masks from pre-trained model.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h3 class="title is-5 has-text-centered">Segmentation Evaluation</h3>
+        <div class="content has-text-justified">
+          For segmentation evaluation, we utilize the
+          NVOS dataset, which is derived from the LLFF dataset
+          and provides ground truth masks with precise object edges.
+        </div>
+        <img alt="Segmentation Evaluation" src="./static/images/table1.png" width="100%"/>
+      </div>
+      <div class="column is-half">
+        <h3 class="title is-5 has-text-centered">Visual Evaluation</h3>
+        <div class="content has-text-justified">
+          Due to the lack of reference images for object segmentation results, we use CLIP-IQA, a no-reference IQA that evaluates how well an image matches the given text prompt. The result shows that our method matches "Clear", "Smooth"
+           and "Complete" better than other comparison methods, highlighting our contribution to boundary optimization.
+        </div>
+        <img alt="Visual Evaluation" src="./static/images/table2.png" width="100%"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Quantitative Results</h2>
+        <img alt="Architecture" src="./static/images/result1.png" width="100%"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+<pre><code>@inproceedings{zhang2025cobgs,
+  title     = {COB-GS: Clear Object Boundaries in 3DGS Segmentation Based on Boundary-Adaptive Gaussian Splitting},
+  author    = {Zhang, Jiaxin and Jiang, Junjun and Chen, Youyu and Jiang, Kui and Liu, Xianming},
+  booktitle = {CVPR},
+  year      = {2025}
+}</code></pre>
+  </div>
+</section>
+
+</body>
+</html>
